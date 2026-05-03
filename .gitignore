@@ -1,0 +1,57 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Eclipse metadata
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (optional)
+*.pydevproject
+
+# CDT-specific (optional)
+.cproject
+
+# JDT-specific (optional)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (optional)
+.buildpath
+
+# maven ignore
+target/
+
+# Tomcat
+WebContent/WEB-INF/classes/
+
+# Temp sources list
+sources.txt
