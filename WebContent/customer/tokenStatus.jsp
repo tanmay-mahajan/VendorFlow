@@ -16,8 +16,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Token Status - VendorFlow</title>
+    <% if(order != null && !"Completed".equals(order.getStatus())) { %>
     <!-- Auto refresh every 10 seconds to check status -->
     <meta http-equiv="refresh" content="10">
+    <% } %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">

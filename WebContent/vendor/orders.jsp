@@ -50,7 +50,7 @@
                                     <td><%= o.getCreatedAt().substring(0, 16) %></td>
                                     <td><%= o.getCustomerName() %></td>
                                     <td><span class="fs-5 fw-bold"><%= o.getTokenNumber() %></span></td>
-                                    <td>â‚¹<%= o.getTotalAmount() %></td>
+                                    <td>₹<%= o.getTotalAmount() %></td>
                                     <td class="text-danger small"><%= o.getSpecialNotes() != null ? o.getSpecialNotes() : "" %></td>
                                     <td>
                                         <span class="badge bg-<%= o.getStatus().toLowerCase() %>"><%= o.getStatus() %></span>

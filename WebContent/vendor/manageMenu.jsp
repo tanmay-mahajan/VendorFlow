@@ -56,7 +56,7 @@
                                         <div class="small text-muted"><%= item.getDescription() %></div>
                                     </td>
                                     <td><%= item.getCategory() %></td>
-                                    <td class="fw-bold">â‚¹<%= item.getPrice() %></td>
+                                    <td class="fw-bold">₹<%= item.getPrice() %></td>
                                     <td>
                                         <% if(item.isAvailable()) { %>
                                             <span class="badge bg-success">Available</span>
@@ -98,7 +98,7 @@
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-6">
-                                                        <label class="form-label">Price (â‚¹)</label>
+                                                        <label class="form-label">Price (₹)</label>
                                                         <input type="number" step="0.01" name="price" class="form-control" value="<%= item.getPrice() %>" required>
                                                     </div>
                                                     <div class="col-6">

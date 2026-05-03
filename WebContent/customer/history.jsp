@@ -52,7 +52,7 @@
                                     <td><%= o.getCreatedAt().substring(0, 16) %></td>
                                     <td><%= o.getVendorShopName() %></td>
                                     <td><strong class="fs-5"><%= o.getTokenNumber() %></strong></td>
-                                    <td>â‚¹<%= o.getTotalAmount() %></td>
+                                    <td>₹<%= o.getTotalAmount() %></td>
                                     <td>
                                         <span class="badge bg-<%= o.getStatus().toLowerCase() %>"><%= o.getStatus() %></span>
                                     </td>
@@ -66,42 +66,6 @@
                                         <% } %>
                                     </td>
                                 </tr>
-
-                                <!-- Feedback Modal -->
-                                <div class="modal fade" id="feedbackModal<%= o.getId() %>" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="<%=request.getContextPath()%>/FeedbackServlet" method="post">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Rate Order #<%= o.getId() %></h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="orderId" value="<%= o.getId() %>">
-                                                    <input type="hidden" name="vendorId" value="<%= o.getVendorId() %>">
-                                                    
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Rating</label>
-                                                        <select name="rating" class="form-select" required>
-                                                            <option value="5">5 - Excellent</option>
-                                                            <option value="4">4 - Good</option>
-                                                            <option value="3">3 - Average</option>
-                                                            <option value="2">2 - Poor</option>
-                                                            <option value="1">1 - Terrible</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Comments (Optional)</label>
-                                                        <textarea name="comments" class="form-control" rows="2"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             <% } %>
                             <% if(orders.isEmpty()) { %>
                                 <tr><td colspan="7" class="text-center py-4">No past orders found.</td></tr>
@@ -111,6 +75,48 @@
                 </div>
             </div>
         </div>
+
+        <!-- Feedback Modals (Moved outside table for better stability) -->
+        <% for(Order o : orders) { 
+            if ("Completed".equals(o.getStatus())) { %>
+            <div class="modal fade" id="feedbackModal<%= o.getId() %>" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form action="<%=request.getContextPath()%>/FeedbackServlet" method="post" class="needs-validation">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold">Rate Order #<%= o.getId() %></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="orderId" value="<%= o.getId() %>">
+                                <input type="hidden" name="vendorId" value="<%= o.getVendorId() %>">
+                                
+                                <p class="text-muted small mb-3">How was your meal from <strong><%= o.getVendorShopName() %></strong>?</p>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Rating</label>
+                                    <select name="rating" class="form-select" required>
+                                        <option value="5">5 - Excellent</option>
+                                        <option value="4">4 - Good</option>
+                                        <option value="3">3 - Average</option>
+                                        <option value="2">2 - Poor</option>
+                                        <option value="1">1 - Terrible</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Comments (Optional)</label>
+                                    <textarea name="comments" class="form-control" rows="3" placeholder="Tell us what you liked or what could be better..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% } } %>
     </main>
 
     <jsp:include page="/common/footer.jsp" />

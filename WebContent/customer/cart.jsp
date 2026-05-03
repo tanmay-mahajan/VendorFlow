@@ -57,7 +57,7 @@
                                                total += ci.getSubtotal(); %>
                                         <tr>
                                             <td class="fw-bold"><%= ci.getMenuItemName() %></td>
-                                            <td>â‚¹<%= ci.getUnitPrice() %></td>
+                                            <td>₹<%= ci.getUnitPrice() %></td>
                                             <td>
                                                 <form action="<%=request.getContextPath()%>/CartServlet" method="post" class="d-flex">
                                                     <input type="hidden" name="action" value="update">
@@ -66,7 +66,7 @@
                                                     <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-clockwise"></i></button>
                                                 </form>
                                             </td>
-                                            <td>â‚¹<%= ci.getSubtotal() %></td>
+                                            <td>₹<%= ci.getSubtotal() %></td>
                                             <td>
                                                 <form action="<%=request.getContextPath()%>/CartServlet" method="post">
                                                     <input type="hidden" name="action" value="remove">
@@ -95,15 +95,15 @@
                             <h5 class="card-title fw-bold border-bottom pb-3 mb-3">Order Summary</h5>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal</span>
-                                <span>â‚¹<%= total %></span>
+                                <span>₹<%= total %></span>
                             </div>
                             <div class="d-flex justify-content-between mb-3 text-success">
                                 <span>Taxes & Fees</span>
-                                <span>â‚¹0.00</span>
+                                <span>₹0.00</span>
                             </div>
                             <div class="d-flex justify-content-between mb-4 border-top pt-3">
                                 <h5 class="fw-bold">Total</h5>
-                                <h5 class="fw-bold text-primary">â‚¹<%= total %></h5>
+                                <h5 class="fw-bold text-primary">₹<%= total %></h5>
                             </div>
 
                             <form action="<%=request.getContextPath()%>/PlaceOrderServlet" method="post" id="placeOrderForm">

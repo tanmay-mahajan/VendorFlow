@@ -36,7 +36,7 @@
                 <div class="card text-white bg-success h-100 dash-card" style="border-left-color: #1b5e20;">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-currency-rupee"></i> Today's Revenue</h5>
-                        <h1 class="display-3 fw-bold">â‚¹<%= todayRev %></h1>
+                        <h1 class="display-3 fw-bold">₹<%= todayRev %></h1>
                         <a href="analytics.jsp" class="text-white text-decoration-none mt-2 d-inline-block">View full analytics &rarr;</a>
                     </div>
                 </div>

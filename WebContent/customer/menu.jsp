@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start">
                             <h5 class="card-title fw-bold"><%= item.getName() %></h5>
-                            <span class="badge bg-success">â‚¹<%= item.getPrice() %></span>
+                            <span class="badge bg-success">₹<%= item.getPrice() %></span>
                         </div>
                         <p class="card-text text-muted small"><%= item.getDescription() %></p>
                         <p class="card-text mb-0"><small class="text-info"><%= item.getCategory() %></small></p>

@@ -36,7 +36,7 @@
                 <div class="col-md-3">
                     <div class="card shadow-sm border-0 bg-light"><div class="card-body">
                         <div class="text-muted small text-uppercase fw-bold">Total Revenue</div>
-                        <h3 class="mb-0 text-success">â‚¹<span id="mTotalRev">0</span></h3>
+                        <h3 class="mb-0 text-success">₹<span id="mTotalRev">0</span></h3>
                     </div></div>
                 </div>
                 <div class="col-md-3">
@@ -161,7 +161,7 @@
                             labels: ['Pending', 'Completed'],
                             datasets: [{
                                 data: [data.pendingOrders, data.completedOrders],
-                                backgroundColor: ['#ffc107', '#4CAF50']
+                                backgroundColor: ['#fa983a', '#0c2461']
                             }]
                         }
                     });

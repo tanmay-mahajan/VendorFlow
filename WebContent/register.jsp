@@ -38,7 +38,7 @@
                     
                     <div class="mb-3">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" name="name" required>
+                        <input type="text" class="form-control" name="name" required minlength="3" placeholder="At least 3 characters">
                     </div>
 
                     <div class="mb-3">
@@ -48,7 +48,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="phone">
+                        <input type="text" class="form-control" name="phone" placeholder="10-digit number" maxlength="10">
                     </div>
 
                     <div class="mb-3">
