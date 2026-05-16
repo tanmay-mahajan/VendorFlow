@@ -13,8 +13,8 @@ DROP TABLE IF EXISTS users         CASCADE;
 
 -- ============================================================
 -- TABLE: users
--- Stores customers, vendors, and admins in a single table.
--- role: 'customer' | 'vendor' | 'admin'
+-- Stores customers, vendors in a single table.
+-- role: 'customer' | 'vendor' | 
 -- ============================================================
 CREATE TABLE users (
     id           SERIAL       PRIMARY KEY,

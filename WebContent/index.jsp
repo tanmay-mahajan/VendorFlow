@@ -14,8 +14,41 @@
     <style>
         .hero-section {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 100px 0;
+            padding: 72px 0;
             text-align: center;
+        }
+        .sdg-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid rgba(12, 36, 97, 0.12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: 0 8px 18px rgba(12, 36, 97, 0.08);
+            color: #1f2a37;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+        }
+        .sdg-badge-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 62px;
+            height: 30px;
+            padding: 0 0.7rem;
+            border-radius: 999px;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .sdg-badge-text {
+            text-align: left;
+            font-size: 0.84rem;
+            color: #526071;
         }
         .feature-icon {
             font-size: 3rem;
@@ -32,6 +65,10 @@
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="container">
+                <div class="sdg-badge" aria-label="Supports SDG 9 and SDG 11">
+                    <span class="sdg-badge-number">SDG 9 + 11</span>
+                    <span class="sdg-badge-text">Industry, Innovation and Infrastructure with Sustainable Cities and Communities</span>
+                </div>
                 <h1 class="display-4 fw-bold text-dark mb-4">Smart Vendor Queue & Order Management</h1>
                 <p class="lead text-muted mb-5">Digital ordering and First-Come-First-Serve (FCFS) queue management for college canteens, juice centers, and food stalls.</p>
                 <div>

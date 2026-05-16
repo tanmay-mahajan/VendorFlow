@@ -6,20 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - VendorFlow</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
-    <script>
-        function toggleVendorFields() {
-            var role = document.getElementById("roleSelect").value;
-            var vendorFields = document.getElementById("vendorFields");
-            if (role === 'vendor') {
-                vendorFields.style.display = 'block';
-                document.getElementById('shopName').setAttribute('required', 'true');
-            } else {
-                vendorFields.style.display = 'none';
-                document.getElementById('shopName').removeAttribute('required');
-            }
-        }
-    </script>
+    <link href="<%=request.getContextPath()%>/css/style.css?v=20260506-1" rel="stylesheet">
 </head>
 <body>
 
@@ -34,46 +21,83 @@
                     <div class="alert alert-danger"><%= request.getAttribute("error") %></div>
                 <% } %>
 
-                <form action="<%=request.getContextPath()%>/RegisterServlet" method="post" class="needs-validation" novalidate>
+                <form action="<%=request.getContextPath()%>/RegisterServlet" method="post" class="needs-validation register-form" novalidate>
                     
                     <div class="mb-3">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" name="name" required minlength="3" placeholder="At least 3 characters">
+                        <label class="form-label" for="nameInput">Full Name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            id="nameInput"
+                            required
+                            minlength="3"
+                            pattern="[A-Za-z ]{3,}"
+                            placeholder="Only alphabets"
+                            oninput="validateName(this)">
+                        <div class="invalid-feedback">Name must contain only alphabets and spaces, minimum 3 characters.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="email" required>
+                        <label class="form-label" for="emailInput">Email address</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            id="emailInput"
+                            required
+                            placeholder="Valid email"
+                            oninput="validateEmail(this)">
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="phone" placeholder="10-digit number" maxlength="10">
+                        <label class="form-label" for="phoneInput">Phone Number</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="phone"
+                            id="phoneInput"
+                            required
+                            pattern="[0-9]{10}"
+                            inputmode="numeric"
+                            maxlength="10"
+                            placeholder="10-digit number only"
+                            oninput="validatePhone(this)">
+                        <div class="invalid-feedback">Phone must contain exactly 10 digits and numbers only.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" required>
+                        <label class="form-label" for="passwordInput">Password</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            id="passwordInput"
+                            required
+                            minlength="6"
+                            placeholder="Minimum 6 characters"
+                            oninput="validatePassword(this)">
+                        <div class="invalid-feedback">Password must be at least 6 characters.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Register As</label>
+                        <label class="form-label" for="roleSelect">Register As</label>
                         <select class="form-select" name="role" id="roleSelect" onchange="toggleVendorFields()" required>
                             <option value="customer" selected>Customer</option>
                             <option value="vendor">Vendor</option>
                         </select>
                     </div>
 
-                    <!-- Vendor Specific Fields (Hidden by default) -->
                     <div id="vendorFields" style="display: none;" class="p-3 bg-light rounded mb-3 border">
                         <h6 class="mb-3 fw-bold text-primary">Vendor Details</h6>
                         <div class="mb-2">
-                            <label class="form-label">Shop / Stall Name <span class="text-danger">*</span></label>
+                            <label class="form-label" for="shopName">Shop / Stall Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="shopName" id="shopName">
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Shop Location / Address</label>
-                            <textarea class="form-control" name="shopAddress" rows="2"></textarea>
+                            <label class="form-label" for="shopAddress">Shop Location / Address</label>
+                            <textarea class="form-control" name="shopAddress" id="shopAddress" rows="2"></textarea>
                         </div>
                     </div>
 
@@ -91,7 +115,7 @@
     <jsp:include page="/common/footer.jsp" />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/main.js"></script>
+    <script src="<%=request.getContextPath()%>/js/validation.js?v=20260506-1"></script>
+    <script src="<%=request.getContextPath()%>/js/main.js?v=20260506-1"></script>
 </body>
 </html>
-

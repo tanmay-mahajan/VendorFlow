@@ -6,24 +6,33 @@ $SOURCES_FILE = "$PROJECT_ROOT\sources.txt"
 $CLASSES_PATH = "$PROJECT_ROOT\WebContent\WEB-INF\classes"
 $LIB_PATH     = "$PROJECT_ROOT\WebContent\WEB-INF\lib"
 $TOMCAT_LIB   = "$TOMCAT_HOME\lib"
+$DEPLOY_PATH  = "$TOMCAT_HOME\webapps\VendorFlow"
 
 # Ensure classes directory exists
 if (!(Test-Path $CLASSES_PATH)) { New-Item -ItemType Directory -Path $CLASSES_PATH }
 
-# Dynamically generate sources.txt (Internal to project)
+Write-Host "Syncing web content to Tomcat..." -ForegroundColor Gray
+if (!(Test-Path $DEPLOY_PATH)) { New-Item -ItemType Directory -Path $DEPLOY_PATH | Out-Null }
+Copy-Item -Path "$PROJECT_ROOT\WebContent\*" -Destination $DEPLOY_PATH -Recurse -Force
+Copy-Item -Path "$PROJECT_ROOT\WebContent\WEB-INF\classes\*" -Destination "$DEPLOY_PATH\WEB-INF\classes" -Recurse -Force -ErrorAction SilentlyContinue
+
+# Collect Java source files
 Write-Host "Syncing source file list..." -ForegroundColor Gray
-Get-ChildItem -Path "$PROJECT_ROOT\src" -Filter *.java -Recurse | ForEach-Object { "`"$($_.FullName)`"" } | Out-File -FilePath $SOURCES_FILE -Encoding utf8
+$SOURCE_FILES = Get-ChildItem -Path "$PROJECT_ROOT\src" -Filter *.java -Recurse | ForEach-Object { $_.FullName }
 
 Write-Host "Compiling VendorFlow..." -ForegroundColor Cyan
 
 # Define classpath
-$CP = "`"$TOMCAT_LIB\*`";`"$LIB_PATH\*`""
-$ARG_LIST = @("-d", "`"$CLASSES_PATH`"", "-cp", $CP, "`"@$SOURCES_FILE`"")
+$CP = "$TOMCAT_LIB\*;$LIB_PATH\*"
+$ARG_LIST = @("-d", $CLASSES_PATH, "-cp", $CP) + $SOURCE_FILES
 
 # Run javac
 & javac @ARG_LIST
 
 if ($LASTEXITCODE -eq 0) {
+    Write-Host "Updating deployed classes..." -ForegroundColor Gray
+    if (!(Test-Path "$DEPLOY_PATH\WEB-INF\classes")) { New-Item -ItemType Directory -Path "$DEPLOY_PATH\WEB-INF\classes" -Force | Out-Null }
+    Copy-Item -Path "$CLASSES_PATH\*" -Destination "$DEPLOY_PATH\WEB-INF\classes" -Recurse -Force
     Write-Host "Compilation successful!" -ForegroundColor Green
     Write-Host "Starting Tomcat..." -ForegroundColor Cyan
     $env:CATALINA_HOME = $TOMCAT_HOME
